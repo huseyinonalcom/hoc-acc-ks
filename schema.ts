@@ -884,6 +884,7 @@ export const lists: Lists = {
         defaultValue: { kind: "now" },
         isOrderable: true,
       }),
+      stockAcc: float({ validation: { isRequired: true } }),
       creator: relationship({ ref: "User.stockMovements", many: false }),
       createdAt: timestamp({
         defaultValue: { kind: "now" },
