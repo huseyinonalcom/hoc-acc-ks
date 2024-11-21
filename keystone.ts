@@ -11,7 +11,16 @@ export default withAuth(
     },
     server: {
       port: 3344,
-      cors: undefined,
+      cors: {
+        origin: [
+          "http://localhost:8081",
+          "http://localhost:3000",
+          "http://localhost:5173",
+          "https://serce.mdi-muhasebe.com",
+          "https://serceapi.mdi-muhasebe.com",
+        ],
+        credentials: true,
+      },
       extendExpressApp: (app, context) => {
         var cron = require("node-cron");
         var nodemailer = require("nodemailer");
