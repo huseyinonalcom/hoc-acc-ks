@@ -22,20 +22,6 @@ export default withAuth(
         credentials: true,
       },
       extendExpressApp: (app, context) => {
-        const cors = require("cors");
-        const corsOptions = {
-          origin: [
-            "http://localhost:8081",
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "https://serce.mdi-muhasebe.com",
-            "https://serceapi.mdi-muhasebe.com",
-          ],
-          credentials: true,
-          methods: ["GET", "POST", "OPTIONS"],
-          allowedHeaders: ["Content-Type", "Authorization"],
-        };
-
         var cron = require("node-cron");
         var nodemailer = require("nodemailer");
         var transport = nodemailer.createTransport({
@@ -66,7 +52,7 @@ export default withAuth(
 
         const upload = multer({ storage });
 
-        app.post("/rest/upload", cors(corsOptions), upload.single("file"), (req, res) => {
+        app.post("/rest/upload", upload.single("file"), (req, res) => {
           // @ts-ignore
           if (!req.file) {
             return res.status(400).json({ message: "File upload failed" });
@@ -89,8 +75,6 @@ export default withAuth(
           });
           res.json({ fileUrl });
         });
-
-        app.options("/rest/upload", cors(corsOptions));
 
         app.get("/rest/files/:filename", (req, res) => {
           const filePath = path.join(UPLOAD_DIR, req.params.filename);
