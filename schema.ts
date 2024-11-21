@@ -819,6 +819,7 @@ export const lists: Lists = {
       width: float({ validation: { min: 1 } }),
       height: float({ validation: { min: 1 } }),
       length: float({ validation: { min: 1 } }),
+      weight: float({ validation: { min: 1 } }),
       extraFields: json(),
     },
   }),
