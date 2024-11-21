@@ -66,7 +66,7 @@ export default withAuth(
 
         const upload = multer({ storage });
 
-        app.post("/rest/upload", cors(corsOptions), upload.single("file"), (req, res) => {
+        app.post("/rest/upload", cors(false), upload.single("file"), (req, res) => {
           // @ts-ignore
           if (!req.file) {
             return res.status(400).json({ message: "File upload failed" });
